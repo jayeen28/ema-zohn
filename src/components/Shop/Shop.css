@@ -1,0 +1,19 @@
+.shop-container{
+    display:grid;
+    grid-template-columns:3fr 1fr;
+    text-align: left;
+}
+.product-container{
+    border-right:1px solid rgba(63, 63, 63, 0.603);
+    margin-right:5px;
+    margin-left: 30px;
+}
+.search-container{
+    background-color: #212121e0;
+    padding: 10px 0;
+}
+.search-container input{
+    width: 50%;
+    border-radius: 10px;
+    border: 1px solid black;
+}
