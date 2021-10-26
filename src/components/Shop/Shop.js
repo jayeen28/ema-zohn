@@ -9,19 +9,22 @@ import { Link } from 'react-router-dom';
 const Shop = () => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useCart(products);
+    const [pages, setpages] = useState(0);
+    const [activePage, setactivePage] = useState(0);
+    const size = 10;
     // products to be rendered on the UI
     const [displayProducts, setDisplayProducts] = useState([]);
-
     useEffect(() => {
-        fetch('./products.json')
+        fetch(`http://localhost:5000/products?page=${activePage}&&size=${size}`)
             .then(res => res.json())
             .then(data => {
-                setProducts(data);
-                setDisplayProducts(data);
+                setProducts(data.products);
+                setDisplayProducts(data.products);
+                const totalCont = data.count;
+                const pageCalculate = Math.ceil(totalCont / size);
+                setpages(pageCalculate);
             });
-    }, []);
-
-
+    }, [activePage]);
 
     const handleAddToCart = (product) => {
         const exists = cart.find(pd => pd.key === product.key);
@@ -67,6 +70,15 @@ const Shop = () => {
                         >
                         </Product>)
                     }
+                    <div className="pagination">
+                        {
+                            [...Array(pages).keys()].map(num => <button
+                                className={activePage === num ? 'btn-active' : ''}
+                                key={num}
+                                onClick={() => setactivePage(num)}
+                            >{num + 1}</button>)
+                        }
+                    </div>
                 </div>
                 <div className="cart-container">
                     <Cart cart={cart}>
