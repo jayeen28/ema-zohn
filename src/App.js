@@ -4,6 +4,7 @@ import Header from './components/Header/Header';
 import Inventory from './components/Inventory/Inventory';
 import NotFound from './components/NotFound/NotFound';
 import OrderReview from './components/OrderReview/OrderReview';
+import Orders from './components/Orders/Orders';
 import PlaceOrder from './components/PlaceOrder/PlaceOrder';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import Register from './components/Register/Register';
@@ -43,6 +44,9 @@ function App() {
             <Route path='/register'>
               <Register></Register>
             </Route>
+            <PrivateRoute path="/orders">
+              <Orders></Orders>
+            </PrivateRoute>
             <Route path="*">
               <NotFound></NotFound>
             </Route>
